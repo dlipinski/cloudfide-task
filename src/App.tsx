@@ -1,23 +1,17 @@
 import styled from 'styled-components'
+import { AppRoutes } from './routes/AppRoutes'
+
+const AppShell = styled.div`
+  min-height: 100vh;
+  background: ${({ theme }) => theme.colors.surfaceAlt};
+`
 
 function App() {
   return (
     <AppShell>
-      <Message>Good luck!</Message>
+      <AppRoutes />
     </AppShell>
   )
 }
-
-const AppShell = styled.div`
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const Message = styled.h1`
-  font-size: 2.5rem;
-  color: ${({ theme }) => theme.colors.inkStrong};
-`
 
 export default App

@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./backend
+    container_name: modular-form-creator-backend
+    ports:
+      - "5001:5001"
+    environment:
+      PORT: "5001"
+      MONGO_URI: "mongodb://mongo:27017/modular_form_creator"
+      CORS_ORIGIN: "http://localhost:5173"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:7
+    container_name: modular-form-creator-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

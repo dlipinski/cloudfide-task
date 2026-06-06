@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+storybook-static
+coverage
+playwright-report
+backend
+docs
+.git
+.github
+*.log
+.DS_Store

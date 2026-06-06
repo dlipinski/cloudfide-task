@@ -1,15 +1,18 @@
+# Production stack: frontend built to a static bundle and served by nginx.
+# Run with: docker compose -f docker-compose.prod.yml up -d --build
 services:
   frontend:
     build:
       context: .
-      target: dev
+      target: prod
+      args:
+        # Baked into the bundle at build time. The browser runs on the host, so
+        # it reaches the backend via the host port, matching backend CORS_ORIGIN.
+        VITE_API_URL: "http://localhost:5001"
     container_name: modular-form-creator-frontend
     ports:
-      - "5173:5173"
-    environment:
-      # The browser runs on the host, so it reaches the backend via the host
-      # port, not the internal `backend` hostname. Matches backend CORS_ORIGIN.
-      VITE_API_URL: "http://localhost:5001"
+      # nginx listens on 80; expose on host 5173 so backend CORS_ORIGIN matches.
+      - "5173:80"
     depends_on:
       - backend
   backend:
